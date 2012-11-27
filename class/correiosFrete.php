@@ -8,6 +8,9 @@
 * @date 2012-11-27
 * @version 1.0.0
 *
+* Code on GitHub:
+*    https://github.com/riboni/CorreiosSOAP
+*
 */
 class CorreiosFrete{
   var $serviceCode;

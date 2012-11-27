@@ -35,6 +35,10 @@
 *   1 – Formato caixa/pacote.
 *   2 – Formato rolo/prisma.
 *   3 - Envelope.
+*
+* Code on GitHub:
+*    https://github.com/riboni/CorreiosSOAP
+*
 */
 class CorreiosSOAP{
   var $classVersion            = '1.0.0';
