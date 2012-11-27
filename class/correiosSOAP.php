@@ -56,6 +56,22 @@ class CorreiosSOAP{
   function CorreiosSOAP(){
   }
 
+  function setSoapTimeout($v){
+    $this -> soapTimeout = $v;
+  }
+
+  function setSoapKeepAlive($v){
+    $this -> soapKeepAlive = $v;
+  }
+
+  function setCorreiosCompanyCode($v){
+    $this -> correiosCompanyCode = $v;
+  }
+
+  function setCorreiosCompanyPassword($v){
+    $this -> correiosCompanyPassword = $v;
+  }
+
   function addError($code, $error){
     $this -> soapError[ $code ] = $error;
     $this -> soapHasError       = true;
@@ -146,7 +162,7 @@ class CorreiosSOAP{
       foreach($parametersRaw as $k => $v){
         if( $k == 'nCdServico' ){
           if( !$this -> isServiceCodeValid( $v ) ){
-            $this -> addError('W03', 'Invalid Service Code');
+            $this -> addError('W00', 'Invalid Service Code');
             return false;
           }
         }
@@ -204,7 +220,7 @@ class CorreiosSOAP{
 
   function getFrete($serviceCode, $originCEP, $destinationCEP, $formatCode, $weight, $length, $height, $width, $value = '0', $diameter = 0, $deliverByHand = false, $sendNoticeReceipt = false){
     if( !$this -> isFormatValid( $formatCode ) ){
-      $this -> addError('W04', 'Invalid Format Code');
+      $this -> addError('W05', 'Invalid Format Code');
       return false;
     }
     $parameters['nCdServico']        = $serviceCode;
@@ -239,7 +255,7 @@ class CorreiosSOAP{
 
   function getPreco($serviceCode, $originCEP, $destinationCEP, $formatCode, $weight, $length, $height, $width, $value = '0', $diameter = 0, $deliverByHand = false, $sendNoticeReceipt = false){
     if( !$this -> isFormatValid( $formatCode ) ){
-      $this -> addError('W04', 'Invalid Format Code');
+      $this -> addError('W06', 'Invalid Format Code');
       return false;
     }
     $parameters['nCdServico']        = $serviceCode;
