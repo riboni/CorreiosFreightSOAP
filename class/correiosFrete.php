@@ -22,10 +22,10 @@ class CorreiosFrete{
   var $statedValue;
   var $homeDelivery;
   var $saturdayDelivery;
-  
+
   function CorreiosFrete(){
   }
-  
+
   function setServiceCode($v) {
     $this -> serviceCode = $v;
   }
@@ -91,11 +91,11 @@ class CorreiosFrete{
 
   function setByStdClass($object){
     $this -> setServiceCode( $object -> Codigo );
-    $this -> setTotalValue( $object -> Valor );
+    $this -> setTotalValue( str_replace(',', '.', $object -> Valor) );
     $this -> setDeliveryTime( $object -> PrazoEntrega );
-    $this -> setByHandValue( $object -> ValorMaoPropria );
-    $this -> setNoticeReceiptValue( $object -> ValorAvisoRecebimento );
-    $this -> setStatedValue( $object -> ValorValorDeclarado );
+    $this -> setByHandValue( str_replace(',', '.', $object -> ValorMaoPropria) );
+    $this -> setNoticeReceiptValue( str_replace(',', '.', $object -> ValorAvisoRecebimento) );
+    $this -> setStatedValue( str_replace(',', '.', $object -> ValorValorDeclarado) );
     $this -> setHomeDelivery( $object -> EntregaDomiciliar );
     $this -> setSaturdayDelivery( $object -> EntregaSabado );
   }
