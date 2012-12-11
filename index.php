@@ -1,7 +1,7 @@
 <?php
 include_once('class/correiosFrete.php');
-include_once('class/correiosSOAP.php');
-$correiosSoap            = new CorreiosSOAP();
+include_once('class/correiosFreteSOAP.php');
+$correiosSoap            = new CorreiosFreteSOAP();
 $services                = $correiosSoap -> getServices();
 $formats                 = $correiosSoap -> getFormats();
 $packages                = $correiosSoap -> getPackages();
@@ -54,7 +54,7 @@ if( isset( $_POST['makeQuery'] ) && $_POST['makeQuery'] == 'TRUE' ){
     $embalagem                 = '_NOPACKAGE_';
     $embalagemDetails['PRICE'] = 0;
   }
-  $correiosSoap -> calculateFrete($servicosPesquisa, $cepOrigem, $cepDestino, $formato, $peso, $comprimento, $largura, $altura, $valorDeclarado , $diametro, $maoPropria, $avisoRecebimento);
+  $correiosSoap -> calculateFreight($servicosPesquisa, $cepOrigem, $cepDestino, $formato, $peso, $comprimento, $largura, $altura, $valorDeclarado , $diametro, $maoPropria, $avisoRecebimento);
 }else{
   $query            = false;
   $servicos         = array();

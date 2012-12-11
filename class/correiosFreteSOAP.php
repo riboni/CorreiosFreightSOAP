@@ -40,7 +40,7 @@
 *    https://github.com/riboni/CorreiosSOAP
 *
 */
-class CorreiosSOAP{
+class CorreiosFreteSOAP{
   var $classVersion            = '1.0.0';
   var $soapUrl                 = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL';
   var $soapTimeout             = 30;
@@ -89,7 +89,7 @@ class CorreiosSOAP{
   var $correiosCompanyCode     = '';
   var $correiosCompanyPassword = '';
 
-  function CorreiosSOAP(){
+  function CorreiosFreteSOAP(){
   }
 
   function setSoapTimeout($v){
@@ -299,7 +299,7 @@ class CorreiosSOAP{
     }
   }
 
-  function calculateFrete($serviceCode, $originCEP, $destinationCEP, $formatCode, $weight, $length, $width, $height, $declaredValue = 0, $diameter = 0, $deliverByHand = false, $sendNoticeReceipt = false){
+  function calculateFreight($serviceCode, $originCEP, $destinationCEP, $formatCode, $weight, $length, $width, $height, $declaredValue = 0, $diameter = 0, $deliverByHand = false, $sendNoticeReceipt = false){
     if( !$this -> isFormatValid( $formatCode ) ){
       $this -> addError('WS06', 'Código de formato inválido');
       return false;
@@ -343,14 +343,14 @@ class CorreiosSOAP{
     return $this -> call('CalcPrecoPrazo', $parameters);
   }
 
-  function getPrazo($serviceCode, $originCEP, $destinationCEP){
+  function calculateTerm($serviceCode, $originCEP, $destinationCEP){
     $parameters['nCdServico'] = $serviceCode;
     $parameters['sCepOrigem'] = $this -> formatCEP( $originCEP );
     $parameters['sCepDestino'] = $this -> formatCEP( $destinationCEP );
     $this -> call('CalcPrazo', $parameters);
   }
 
-  function getPreco($serviceCode, $originCEP, $destinationCEP, $formatCode, $weight, $length, $width, $height, $value = '0', $diameter = 0, $deliverByHand = false, $sendNoticeReceipt = false){
+  function calculatePrice($serviceCode, $originCEP, $destinationCEP, $formatCode, $weight, $length, $width, $height, $value = '0', $diameter = 0, $deliverByHand = false, $sendNoticeReceipt = false){
     if( !$this -> isFormatValid( $formatCode ) ){
       $this -> addError('WS06', 'Código de formato inválido');
       return false;
