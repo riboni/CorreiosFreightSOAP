@@ -1,10 +1,13 @@
-CorreiosFreteSOAP
-=================
+CorreiosFreightSOAP
+===================
 
-Soap Class to access the Correios Frete WS.
+Soap Class to access the Correios Freight Webservice with methods to:
+ 1. Calculate the Freight
+ 2. Calculate the Term
+ 3. Calculate the Price
 
 
-Webservice Correios Documentation
+Correios Webservice Documentation
 =================================
 http://www.correios.com.br/webservices/
 
