@@ -1,7 +1,8 @@
 <?php
-include_once('class/correiosFrete.php');
-include_once('class/correiosFreteSOAP.php');
-$correiosSoap            = new CorreiosFreteSOAP();
+include_once('class/correiosFreight.php');
+include_once('class/correiosFreightSOAP.php');
+
+$correiosSoap            = new CorreiosFreightSOAP();
 $services                = $correiosSoap -> getServices();
 $formats                 = $correiosSoap -> getFormats();
 $packages                = $correiosSoap -> getPackages();

@@ -1,46 +1,21 @@
 <?php
 /*
-* CorreiosWebservice SOAP PHP class - Wrapper to Correios Webservice
+* Correios Freight SOAP PHP class
 *
-* @pakage CORREIOS_SOAP_PHP
+* @pakage CORREIOS_FREIGHT_SOAP_PHP
 * @author Giuliano Riboni <giuliano@riboni.com.br>
 * @copyright 2012 Giuliano Riboni
 * @date 2012-11-27
 * @version 1.0.0
 *
-* Webservice Correios Documentation:
+* Correios Webservice Documentation:
 *   http://www.correios.com.br/webservices/
 *
-* Correios Services Codes:
-*   40010 - SEDEX sem contrato.
-*   40045 - SEDEX a Cobrar, sem contrato.
-*   40126 - SEDEX a Cobrar, com contrato.
-*   40215 - SEDEX 10, sem contrato.
-*   40290 - SEDEX Hoje, sem contrato.
-*   40096 - SEDEX com contrato.
-*   40436 - SEDEX com contrato.
-*   40444 - SEDEX com contrato.
-*   40568 - SEDEX com contrato.
-*   40606 - SEDEX com contrato.
-*   41106 - PAC sem contrato.
-*   41068 - PAC com contrato.
-*   81019 - e-SEDEX, com contrato.
-*   81027 - e-SEDEX Prioritário, com conrato.
-*   81035 - e-SEDEX Express, com contrato.
-*   81868 - (Grupo 1) e-SEDEX, com contrato.
-*   81833 - (Grupo 2) e-SEDEX, com contrato.
-*   81850 - (Grupo 3) e-SEDEX, com contrato.
-*
-* Correios Format Codes:
-*   1 – Formato caixa/pacote.
-*   2 – Formato rolo/prisma.
-*   3 - Envelope.
-*
 * Code on GitHub:
-*    https://github.com/riboni/CorreiosSOAP
+*    https://github.com/riboni/CorreiosFreightSOAP
 *
 */
-class CorreiosFreteSOAP{
+class CorreiosFreightSOAP{
   var $classVersion            = '1.0.0';
   var $soapUrl                 = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL';
   var $soapTimeout             = 30;
@@ -89,7 +64,7 @@ class CorreiosFreteSOAP{
   var $correiosCompanyCode     = '';
   var $correiosCompanyPassword = '';
 
-  function CorreiosFreteSOAP(){
+  function CorreiosFreightSOAP(){
   }
 
   function setSoapTimeout($v){
@@ -282,13 +257,13 @@ class CorreiosFreteSOAP{
       foreach($result as $k => $v){
         $currentResult = $result[ $k ];
         if( $currentResult -> Erro != 0 ){
-          $currentObject = new CorreiosFrete();
+          $currentObject = new CorreiosFreight();
           $currentObject -> setByStdClass( $currentResult );
           $currentObject -> setServiceName( $this -> getServiceName( $currentResult -> Codigo ) );
           $returnArray[ $currentResult -> Codigo ] = $currentObject;
           $this -> addError($currentResult -> Erro, $currentResult -> MsgErro, $currentResult -> Codigo);
         }else{
-          $currentObject = new CorreiosFrete();
+          $currentObject = new CorreiosFreight();
           $currentObject -> setByStdClass( $currentResult );
           $currentObject -> setServiceName( $this -> getServiceName( $currentResult -> Codigo ) );
           $returnArray[ $currentResult -> Codigo ] = $currentObject;
@@ -344,8 +319,8 @@ class CorreiosFreteSOAP{
   }
 
   function calculateTerm($serviceCode, $originCEP, $destinationCEP){
-    $parameters['nCdServico'] = $serviceCode;
-    $parameters['sCepOrigem'] = $this -> formatCEP( $originCEP );
+    $parameters['nCdServico']  = $serviceCode;
+    $parameters['sCepOrigem']  = $this -> formatCEP( $originCEP );
     $parameters['sCepDestino'] = $this -> formatCEP( $destinationCEP );
     $this -> call('CalcPrazo', $parameters);
   }

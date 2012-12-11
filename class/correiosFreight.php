@@ -1,18 +1,21 @@
 <?php
 /*
-* CorreiosWebservice FRETE PHP class - Object to Correios Webservice
+* Correios Freight PHP class
 *
-* @pakage CORREIOS_FRETE_PHP
+* @pakage CORREIOS_FREIGHT_PHP
 * @author Giuliano Riboni <giuliano@riboni.com.br>
 * @copyright 2012 Giuliano Riboni
 * @date 2012-11-27
 * @version 1.0.0
 *
+* Correios Webservice Documentation:
+*   http://www.correios.com.br/webservices/
+*
 * Code on GitHub:
-*    https://github.com/riboni/CorreiosSOAP
+*    https://github.com/riboni/CorreiosFreightSOAP
 *
 */
-class CorreiosFrete{
+class CorreiosFreight{
   var $serviceCode;
   var $serviceName;
   var $totalValue;
@@ -23,7 +26,7 @@ class CorreiosFrete{
   var $homeDelivery;
   var $saturdayDelivery;
 
-  function CorreiosFrete(){
+  function CorreiosFreight(){
   }
 
   function setServiceCode($v) {
@@ -91,13 +94,17 @@ class CorreiosFrete{
 
   function setByStdClass($object){
     $this -> setServiceCode( $object -> Codigo );
-    $this -> setTotalValue( str_replace(',', '.', $object -> Valor) );
+    $this -> setTotalValue( $this -> _makeMoney( $object -> Valor ) );
     $this -> setDeliveryTime( $object -> PrazoEntrega );
-    $this -> setByHandValue( str_replace(',', '.', $object -> ValorMaoPropria) );
-    $this -> setNoticeReceiptValue( str_replace(',', '.', $object -> ValorAvisoRecebimento) );
-    $this -> setStatedValue( str_replace(',', '.', $object -> ValorValorDeclarado) );
+    $this -> setByHandValue( $this -> _makeMoney( $object -> ValorMaoPropria ) );
+    $this -> setNoticeReceiptValue( $this -> _makeMoney( $object -> ValorAvisoRecebimento ) );
+    $this -> setStatedValue( $this -> _makeMoney( $object -> ValorValorDeclarado ) );
     $this -> setHomeDelivery( $object -> EntregaDomiciliar );
     $this -> setSaturdayDelivery( $object -> EntregaSabado );
+  }
+
+  function _makeMoney($v){
+    return str_replace(',', '.', $v);
   }
 }
 ?>
