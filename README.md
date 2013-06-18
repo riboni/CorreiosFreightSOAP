@@ -1,6 +1,5 @@
 CorreiosFreightSOAP
-===================
-
+=====================================================================
 Soap Class to access the Correios Freight Webservice with methods to:
  1. Calculate the Freight
  2. Calculate the Term
@@ -8,10 +7,14 @@ Soap Class to access the Correios Freight Webservice with methods to:
 
 
 Correios Webservice Documentation
-=================================
+=======================================
 http://www.correios.com.br/webservices/
 
+Live Demo
+============================================
+http://correios.giulianoweb.com.br/index.php
+
 Credits
-=======
+================================================
 Author: Giuliano Riboni <giuliano@riboni.com.br>
 Date: 2012-11-27
