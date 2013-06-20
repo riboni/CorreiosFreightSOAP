@@ -14,6 +14,11 @@ $noPackage['DIMENSIONS'] = '0mm x 0mm x 0mm';
 $noPackage['PRICE']      = 0;
 $packages                = array_merge( array('_NOPACKAGE_' => $noPackage), $packages);
 if( isset( $_POST['makeQuery'] ) && $_POST['makeQuery'] == 'TRUE' ){
+  if( isset( $_POST['selecionarTodosButton'] ) && $_POST['selecionarTodosButton'] != '' ){
+    $selecionarTodosButton = ' checked';
+  }else{
+    $selecionarTodosButton = '';
+  }
   if( is_array( $_POST['servico'] ) ){
     $servicos         = array_flip($_POST['servico']);
     $servicosPesquisa = implode(',', $_POST['servico']);
@@ -110,7 +115,7 @@ if( isset( $_POST['makeQuery'] ) && $_POST['makeQuery'] == 'TRUE' ){
     <tr>
         <td valign="top">Servi&ccedil;o dos Correios:</td>
         <td>
-          <input type="checkbox" name="selecionarTodosButton" onClick="selecionarTodos(this);">Selecionar Todos<br>
+          <input type="checkbox" name="selecionarTodosButton" onClick="selecionarTodos(this);"<?php echo $selecionarTodosButton; ?>>Selecionar Todos<br>
 <?php
   if( is_array( $services ) && sizeof( $services ) > 0 ){
     foreach($services as $k => $v){
@@ -362,10 +367,10 @@ if( isset( $_POST['makeQuery'] ) && $_POST['makeQuery'] == 'TRUE' ){
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
   function selecionarTodos(source){
-    checkboxes = document.getElementsByName('servico');
+    checkboxes = document.getElementsByName('servico[]');
     if( checkboxes.length > 0 ){
       for (var i = 0; i < checkboxes.length; i++) {
-        var checkbox[ i ];
+        var checkbox = checkboxes[ i ];
         checkbox.checked = source.checked;
       }
     }
