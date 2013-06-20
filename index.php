@@ -110,6 +110,7 @@ if( isset( $_POST['makeQuery'] ) && $_POST['makeQuery'] == 'TRUE' ){
     <tr>
         <td valign="top">Servi&ccedil;o dos Correios:</td>
         <td>
+          <input type="checkbox" name="selecionarTodosButton" onClick="selecionarTodos(this);">Selecionar Todos<br>
 <?php
   if( is_array( $services ) && sizeof( $services ) > 0 ){
     foreach($services as $k => $v){
@@ -351,5 +352,24 @@ if( isset( $_POST['makeQuery'] ) && $_POST['makeQuery'] == 'TRUE' ){
     }
   }
 ?>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27137457-8']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  function selecionarTodos(source){
+    checkboxes = document.getElementsByName('servico');
+    if( checkboxes.length > 0 ){
+      for (var i = 0; i < checkboxes.length; i++) {
+        var checkbox[ i ];
+        checkbox.checked = source.checked;
+      }
+    }
+  }
+</script>
 </body>
 </html>
